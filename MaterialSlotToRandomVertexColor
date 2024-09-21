@@ -1,0 +1,24 @@
+import random
+import bpy
+
+
+def main():
+    for obj in bpy.data.objects:
+            print("obj")
+            i = 0   
+            mesh = obj.data   
+            color_layer = mesh.vertex_colors.active
+            materials_colors = []
+            verts = [None]*20
+            for vert in verts:
+                materials_colors.append((random.random(), random.random(), random.random(), 1))
+
+            print(len(materials_colors))
+            for polygon in mesh.polygons:
+                for idx in polygon.loop_indices:
+                    color_layer.data[i].color = materials_colors[polygon.material_index]
+                    i += 1
+
+
+
+main()
